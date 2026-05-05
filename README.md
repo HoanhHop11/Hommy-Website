@@ -29,12 +29,12 @@
 * **Frontend:** React, Vite (Thư mục: `client/`)
 * **Database:** MySQL / MariaDB (Schema tại `thue_tro.sql`)
 
-## Khởi chạy Dự án (Quick Start)
+## Khởi chạy Dự án (Môi trường Development)
 
 1.  **Clone repository:**
     ```bash
-    git clone https://github.com/tienchung21/daphongtro.git
-    cd daphongtro
+    git clone https://github.com/HoanhHop11/Hommy-Website.git
+    cd Hommy-Website
     ```
 
 2.  **Cài đặt dependencies:**
@@ -66,3 +66,21 @@
     # Chạy frontend dev server (từ thư mục client/)
     npm run dev
     ```
+
+## 🚀 Hướng dẫn Build & Deploy (Môi trường Production)
+
+Để triển khai hệ thống lên môi trường production an toàn và hiệu năng tốt nhất, bạn cần thực hiện theo các bước sau:
+
+1. **Thiết lập Môi trường:**
+   - Đảm bảo trong `server/.env` có biến `NODE_ENV=production`.
+   - Sử dụng các chuỗi `JWT_SECRET` mạnh. Không bao giờ commit `.env` lên Repository. Toàn bộ `*.env` đã được thiết lập vô hiệu hoá commit thông qua `.gitignore`.
+2. **Build Frontend:**
+   - Truy cập vào folder `client/`.
+   - Chạy lệnh `npm run build`. Hệ thống sẽ tối ưu hóa và buid các file static vào thư mục `dist/`.
+   - Deploy thư mục `dist/` thông qua Nginx, Vercel, hoặc môi trường CDN bạn chọn.
+3. **Chạy Backend:**
+   - Nên sử dụng Process Manager như **PM2** để chạy server ổn định.
+   - Lệnh khởi chạy: `pm2 start index.js --name "hommy-backend"`.
+4. **CI/CD Pipeline:**
+   - Hệ thống đã được thiết lập sẵn luồng CI/CD chạy thông qua GitHub Actions (File tham chiếu: `.github/workflows/ci-cd.yml`).
+   - Mọi Pull Request hoặc Push vào nhánh `main` sẽ kích hoạt tự động việc check build.

@@ -39,3 +39,8 @@ client/public/tessdata/*.traineddata
 *.sw?
 
 server/.env
+
+# Environment variables
+.env
+*.env
+server/.env
