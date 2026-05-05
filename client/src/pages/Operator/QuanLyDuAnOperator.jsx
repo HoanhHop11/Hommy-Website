@@ -6,7 +6,7 @@ import FilterPanelOperator from '../../components/Operator/shared/FilterPanelOpe
 import BadgeStatusOperator from '../../components/Operator/shared/BadgeStatusOperator';
 import ModalTamNgungDuAn from './modals/ModalTamNgungDuAn';
 import ModalDuyetHoaHong from './modals/ModalDuyetHoaHong';
-import { operatorApi } from '../../services/operatorApi';
+import { operatorApi } from '../../api/operatorApi';
 import './QuanLyDuAnOperator.css';
 
 /**

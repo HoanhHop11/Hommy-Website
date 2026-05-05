@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import ModalOperator from '../../../components/Operator/shared/ModalOperator';
-import { operatorApi } from '../../../services/operatorApi';
+import { operatorApi } from '../../../api/operatorApi';
 import './ModalTaoBienBan.css';
 
 /**

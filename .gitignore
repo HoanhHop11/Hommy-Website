@@ -37,3 +37,5 @@ client/public/tessdata/*.traineddata
 *.njsproj
 *.sln
 *.sw?
+
+server/.env

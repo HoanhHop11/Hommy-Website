@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { noiDungHeThongApi } from '../../services/operatorApi';
+import { noiDungHeThongApi } from '../../api/operatorApi';
 import './QuanLyChinhSach.css';
 
 const LOAI_NOI_DUNG_OPTIONS = [

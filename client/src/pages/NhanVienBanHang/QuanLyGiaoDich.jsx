@@ -20,7 +20,7 @@ import {
   xacNhanCoc,
   hoanTraCoc,
   taiBienNhan
-} from '../../services/nhanVienBanHangApi';
+} from '../../api/nhanVienBanHangApi';
 import {
   formatDate,
   formatCurrency,

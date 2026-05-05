@@ -20,7 +20,7 @@ import {
 } from 'react-icons/hi2';
 import useSocket from '../../../hooks/useSocket';
 import useNotificationSound from '../../../hooks/useNotificationSound';
-import { danhDauDaDoc } from '../../../services/nhanVienBanHangApi';
+import { danhDauDaDoc } from '../../../api/nhanVienBanHangApi';
 import './ToastNotification.css';
 
 /**

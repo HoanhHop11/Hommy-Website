@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import OperatorLayout from '../../layouts/OperatorLayout';
-import operatorApi from '../../services/operatorApi';
+import operatorApi from '../../api/operatorApi';
 import { Link } from 'react-router-dom';
 import './DashboardOperator.css';
 import IconOperator from '../../components/Operator/Icon';

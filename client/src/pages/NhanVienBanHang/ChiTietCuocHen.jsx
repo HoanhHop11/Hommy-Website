@@ -29,7 +29,7 @@ import {
   xacNhanCuocHen,
   doiLichCuocHen,
   huyCuocHen
-} from '../../services/nhanVienBanHangApi';
+} from '../../api/nhanVienBanHangApi';
 import { getApiBaseUrl, getStaticUrl } from '../../config/api';
 import { formatDate, formatCurrency, formatPhone } from '../../utils/nvbhHelpers';
 import StatusBadge from '../../components/NhanVienBanHang/StatusBadge';

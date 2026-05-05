@@ -6,7 +6,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import LoadingSkeleton from '../../components/NhanVienBanHang/LoadingSkeleton';
 import ErrorBanner from '../../components/NhanVienBanHang/ErrorBanner';
-import { layHoSo, capNhatHoSo } from '../../services/nhanVienBanHangApi';
+import { layHoSo, capNhatHoSo } from '../../api/nhanVienBanHangApi';
 import '../../styles/NhanVienBanHangDesignSystem.css';
 import './CaiDat.css';
 

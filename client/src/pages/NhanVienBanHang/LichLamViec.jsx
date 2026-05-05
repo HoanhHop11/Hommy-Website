@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from 'react';
 import CalendarGrid from '../../components/NhanVienBanHang/CalendarGrid';
-import { layLichLamViec, taoLichLamViec, xoaLichLamViec, getWeekStart, getWeekEnd } from '../../services/nhanVienBanHangApi';
+import { layLichLamViec, taoLichLamViec, xoaLichLamViec, getWeekStart, getWeekEnd } from '../../api/nhanVienBanHangApi';
 import './LichLamViec.css';
 
 // Helper: format Date về string "YYYY-MM-DD HH:mm:ss" (giờ local, không timezone)

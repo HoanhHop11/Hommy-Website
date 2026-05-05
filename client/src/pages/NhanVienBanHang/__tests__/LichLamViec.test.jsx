@@ -6,10 +6,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import LichLamViec from '../LichLamViec';
-import * as nhanVienBanHangApi from '../../../services/nhanVienBanHangApi';
+import * as nhanVienBanHangApi from '../../../api/nhanVienBanHangApi';
 
 // Mock the API
-vi.mock('../../../services/nhanVienBanHangApi', () => ({
+vi.mock('../../../api/nhanVienBanHangApi', () => ({
   layLichLamViec: vi.fn(),
   taoLichLamViec: vi.fn(),
   xoaLichLamViec: vi.fn(),

@@ -6,10 +6,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import QuanLyCuocHen from '../QuanLyCuocHen';
-import * as nhanVienBanHangApi from '../../../services/nhanVienBanHangApi';
+import * as nhanVienBanHangApi from '../../../api/nhanVienBanHangApi';
 
 // Mock the API
-vi.mock('../../../services/nhanVienBanHangApi', () => ({
+vi.mock('../../../api/nhanVienBanHangApi', () => ({
   layDanhSachCuocHen: vi.fn(),
   xacNhanCuocHen: vi.fn(),
   doiLichCuocHen: vi.fn(),

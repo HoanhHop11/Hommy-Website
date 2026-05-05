@@ -22,7 +22,7 @@ import {
   HiOutlineBolt,
   HiOutlineBeaker
 } from 'react-icons/hi2';
-import { xemThongTinQR, phanHoiQR } from '../../services/publicGoiYApi';
+import { xemThongTinQR, phanHoiQR } from '../../api/publicGoiYApi';
 import './XemNgayConfirm.css';
 
 const formatCurrency = (value) => {

@@ -20,7 +20,7 @@ import {
   HiOutlineBuildingOffice2
 } from 'react-icons/hi2';
 import { useReactToPrint } from 'react-to-print';
-import { layBaoCaoThuNhap } from '../../services/nhanVienBanHangApi';
+import { layBaoCaoThuNhap } from '../../api/nhanVienBanHangApi';
 import { formatCurrency, formatDate, exportToExcel, exportToPDF, calculateChange } from '../../utils/nvbhHelpers';
 import MetricCard from '../../components/NhanVienBanHang/MetricCard';
 import LoadingSkeleton from '../../components/NhanVienBanHang/LoadingSkeleton';

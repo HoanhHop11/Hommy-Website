@@ -4,13 +4,13 @@ import OperatorLayout from '../../layouts/OperatorLayout';
 import TableOperator from '../../components/Operator/shared/TableOperator';
 import FilterPanelOperator from '../../components/Operator/shared/FilterPanelOperator';
 import BadgeStatusOperator from '../../components/Operator/shared/BadgeStatusOperator';
-import CalendarView from './components/CalendarView';
+import CalendarView from '../../components/Operator/CalendarView';
 import ModalGanLaiCuocHen from './modals/ModalGanLaiCuocHen';
 import ModalChiTietLichNVBH from './modals/ModalChiTietLichNVBH';
 import {
   lichLamViecOperatorApi,
   cuocHenOperatorApi
-} from '../../services/operatorApi';
+} from '../../api/operatorApi';
 import './QuanLyLichNVBH.css';
 
 /**

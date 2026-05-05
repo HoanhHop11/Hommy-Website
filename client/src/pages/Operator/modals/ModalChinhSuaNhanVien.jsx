@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import ModalOperator from '../../../components/Operator/shared/ModalOperator';
-import { operatorApi } from '../../../services/operatorApi';
+import { operatorApi } from '../../../api/operatorApi';
 import './ModalTaoNhanVien.css'; // Reuse ModalTaoNhanVien styles
 
 /**

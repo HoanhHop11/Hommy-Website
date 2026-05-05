@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { HiOutlineXMark } from 'react-icons/hi2';
-import { baoCaoKetQuaCuocHen } from '../../services/nhanVienBanHangApi';
+import { baoCaoKetQuaCuocHen } from '../../api/nhanVienBanHangApi';
 import StarRating from './StarRating';
 import './ModalBaoCaoKetQua.css';
 

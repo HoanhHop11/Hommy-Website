@@ -7,7 +7,7 @@ import BadgeStatusOperator from '../../components/Operator/shared/BadgeStatusOpe
 import ModalTaoNhanVien from './modals/ModalTaoNhanVien';
 import ModalChinhSuaNhanVien from './modals/ModalChinhSuaNhanVien';
 import ModalChiTietNhanVien from './modals/ModalChiTietNhanVien';
-import { operatorApi } from '../../services/operatorApi';
+import { operatorApi } from '../../api/operatorApi';
 import './QuanLyNhanVien.css';
 import { useEffect } from 'react';
 

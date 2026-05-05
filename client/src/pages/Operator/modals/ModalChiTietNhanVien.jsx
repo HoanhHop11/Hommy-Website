@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import ModalOperator from '../../../components/Operator/shared/ModalOperator';
 import BadgeStatusOperator from '../../../components/Operator/shared/BadgeStatusOperator';
-import { operatorApi } from '../../../services/operatorApi';
+import { operatorApi } from '../../../api/operatorApi';
 import './ModalChiTietNhanVien.css';
 
 /**

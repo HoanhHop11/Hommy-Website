@@ -7,7 +7,7 @@ import BadgeStatusNVDH from '../../components/Operator/shared/BadgeStatusOperato
 import ModalTaoBienBan from './modals/ModalTaoBienBan';
 import ModalKyBienBan from './modals/ModalKyBienBan';
 import ModalChiTietBienBan from './modals/ModalChiTietBienBan';
-import { nvdhApi } from '../../services/operatorApi';
+import { nvdhApi } from '../../api/operatorApi';
 import './QuanLyBienBan.css';
 
 /**

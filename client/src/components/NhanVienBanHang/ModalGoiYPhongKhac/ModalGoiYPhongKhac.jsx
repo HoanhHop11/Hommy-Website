@@ -12,7 +12,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineMagnifyingGlass
 } from 'react-icons/hi2';
-import { timKiemGoiY, layDanhSachKhuVuc } from '../../../services/nhanVienBanHangApi';
+import { timKiemGoiY, layDanhSachKhuVuc } from '../../../api/nhanVienBanHangApi';
 import StepLyDo from './StepLyDo';
 import StepBoLoc from './StepBoLoc';
 import StepKetQua from './StepKetQua';

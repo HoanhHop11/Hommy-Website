@@ -23,7 +23,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineArrowLeft
 } from 'react-icons/hi2';
-import { taoQRDatCoc } from '../../../services/nhanVienBanHangApi';
+import { taoQRDatCoc } from '../../../api/nhanVienBanHangApi';
 import { useGoiYSocket, QR_STATUS } from '../../../hooks/useGoiYSocket';
 import {
   SpinningLoader,

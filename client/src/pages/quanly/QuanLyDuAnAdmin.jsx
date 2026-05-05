@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { duAnOperatorApi } from '../../services/operatorApi';
+import { duAnOperatorApi } from '../../api/operatorApi';
 import './QuanLyDuAnAdmin.css';
 
 const STATUS_OPTIONS = [

@@ -17,7 +17,7 @@ import {
   HiOutlineMapPin,
   HiOutlineCurrencyDollar
 } from 'react-icons/hi2';
-import { taoQRXemNgay } from '../../services/nhanVienBanHangApi';
+import { taoQRXemNgay } from '../../api/nhanVienBanHangApi';
 import { useGoiYSocket, QR_STATUS } from '../../hooks/useGoiYSocket';
 import { 
   CountdownCircle, 

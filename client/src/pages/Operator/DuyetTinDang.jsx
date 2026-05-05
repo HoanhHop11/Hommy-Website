@@ -6,7 +6,7 @@ import FilterPanelOperator from '../../components/Operator/shared/FilterPanelOpe
 import BadgeStatusOperator from '../../components/Operator/shared/BadgeStatusOperator';
 import ModalChiTietTinDang from './modals/ModalChiTietTinDang';
 import ModalTuChoiTinDang from './modals/ModalTuChoiTinDang';
-import { operatorApi } from '../../services/operatorApi';
+import { operatorApi } from '../../api/operatorApi';
 import './DuyetTinDang.css';
 
 /**

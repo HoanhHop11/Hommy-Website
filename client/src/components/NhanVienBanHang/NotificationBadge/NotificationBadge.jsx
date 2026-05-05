@@ -7,7 +7,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineBell } from 'react-icons/hi2';
 import useSocket from '../../../hooks/useSocket';
-import { demThongBaoChuaDoc } from '../../../services/nhanVienBanHangApi';
+import { demThongBaoChuaDoc } from '../../../api/nhanVienBanHangApi';
 import './NotificationBadge.css';
 
 const NotificationBadge = ({ onClick, onUnreadCountChange, className = '' }) => {

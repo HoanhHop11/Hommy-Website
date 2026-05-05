@@ -6,9 +6,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CaiDatNhanVienBanHang from '../CaiDat';
-import * as nhanVienBanHangApi from '../../../services/nhanVienBanHangApi';
+import * as nhanVienBanHangApi from '../../../api/nhanVienBanHangApi';
 
-vi.mock('../../../services/nhanVienBanHangApi', () => ({
+vi.mock('../../../api/nhanVienBanHangApi', () => ({
   layHoSo: vi.fn(),
   capNhatHoSo: vi.fn()
 }));

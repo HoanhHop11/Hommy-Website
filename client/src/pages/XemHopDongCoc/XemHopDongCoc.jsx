@@ -23,7 +23,7 @@ import {
   HiOutlineBolt,
   HiOutlineBeaker
 } from 'react-icons/hi2';
-import { xemHopDongCocQR, phanHoiHopDongCoc } from '../../services/publicGoiYApi';
+import { xemHopDongCocQR, phanHoiHopDongCoc } from '../../api/publicGoiYApi';
 import './XemHopDongCoc.css';
 
 const formatCurrency = (value) => {

@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MetricCard from '../../components/NhanVienBanHang/MetricCard';
 import StatusBadge from '../../components/NhanVienBanHang/StatusBadge';
-import { layDashboard, formatDate, formatCurrency } from '../../services/nhanVienBanHangApi';
+import { layDashboard, formatDate, formatCurrency } from '../../api/nhanVienBanHangApi';
 import './Dashboard.css';
 
 // Icons

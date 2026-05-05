@@ -6,7 +6,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiMagnifyingGlass, HiOutlineFunnel, HiOutlineCalendarDays } from 'react-icons/hi2';
-import { layDanhSachCuocHen, xacNhanCuocHen, doiLichCuocHen, huyCuocHen } from '../../services/nhanVienBanHangApi';
+import { layDanhSachCuocHen, xacNhanCuocHen, doiLichCuocHen, huyCuocHen } from '../../api/nhanVienBanHangApi';
 import { formatDate, formatCurrency, debounce } from '../../utils/nvbhHelpers';
 import StatusBadge from '../../components/NhanVienBanHang/StatusBadge';
 import LoadingSkeleton from '../../components/NhanVienBanHang/LoadingSkeleton';

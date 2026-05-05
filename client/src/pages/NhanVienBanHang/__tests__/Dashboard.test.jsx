@@ -6,10 +6,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Dashboard from '../../pages/NhanVienBanHang/Dashboard';
-import * as nhanVienBanHangApi from '../../services/nhanVienBanHangApi';
+import * as nhanVienBanHangApi from '../../api/nhanVienBanHangApi';
 
 // Mock the API
-vi.mock('../../services/nhanVienBanHangApi', () => ({
+vi.mock('../../api/nhanVienBanHangApi', () => ({
   layDashboard: vi.fn(),
   formatDate: vi.fn((date) => date?.toLocaleDateString('vi-VN') || ''),
   formatCurrency: vi.fn((amount) => `${amount.toLocaleString('vi-VN')} ₫`)

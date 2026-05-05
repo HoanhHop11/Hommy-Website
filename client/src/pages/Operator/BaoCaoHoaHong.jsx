@@ -4,7 +4,7 @@ import OperatorLayout from '../../layouts/OperatorLayout';
 import TableOperator from '../../components/Operator/shared/TableOperator';
 import FilterPanelOperator from '../../components/Operator/shared/FilterPanelOperator';
 import BadgeStatusOperator from '../../components/Operator/shared/BadgeStatusOperator';
-import { operatorApi } from '../../services/operatorApi';
+import { operatorApi } from '../../api/operatorApi';
 import { format, subDays } from 'date-fns';
 import {
   LineChart,

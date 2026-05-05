@@ -19,7 +19,7 @@ import {
   HiOutlineHome,
   HiOutlineChevronDown
 } from 'react-icons/hi2';
-import { layChiTietTinDangGoiY } from '../../services/nhanVienBanHangApi';
+import { layChiTietTinDangGoiY } from '../../api/nhanVienBanHangApi';
 import { SpinningLoader } from './AnimatedIcons';
 import { getStaticUrl } from '../../config/api';
 import './PreviewTinDangSheet.css';
