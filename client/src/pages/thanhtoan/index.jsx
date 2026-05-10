@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Footer from '../../components/footer';
 import thanhtoanApi from '../../api/thanhtoanApi';
 import './thanhtoan.css';
 

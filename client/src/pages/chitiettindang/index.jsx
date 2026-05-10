@@ -22,7 +22,7 @@ import {
   HiOutlineClock,
 } from "react-icons/hi2";
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Footer from "../../components/footer";
 import { PublicTinDangService } from "../../services/PublicService"; // Đổi sang PublicService
 import cuocHenApi from "../../api/cuocHenApi"; // ✅ Dùng API mới thay vì PublicCuocHenService
 import MapViTriPhong from "../../components/MapViTriPhong/MapViTriPhong";
