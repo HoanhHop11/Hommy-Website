@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import viApi from "../../api/viApi";
 import lichSuViApi from "../../api/lichSuViApi";
 import { HiOutlineCreditCard, HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
-import NapTienPage from "../NapTien/index";
+import NapTienPage from "../naptien/index";
 import axiosClient from "../../api/axiosClient"; // Import trực tiếp để gọi API mới
 import "./vi.css";
 
