@@ -31,10 +31,13 @@ function Login() {
       console.log('Kết quả đăng nhập:', res.data);
 
       // 🟢 Lưu token và thông tin user vào localStorage
-      const { token, user } = res.data;
+      const { token, user } = res.data || {};
+      if (!token || !user) {
+        throw new Error('Phản hồi đăng nhập không hợp lệ: thiếu token hoặc user');
+      }
       
       // ✅ FIX CRITICAL: Lưu token riêng để API services dùng
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', String(token));
       
       // Lưu thông tin user
       localStorage.setItem('user', JSON.stringify({

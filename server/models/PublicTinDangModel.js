@@ -23,7 +23,7 @@ class PublicTinDangModel {
     try {
       let query = `
         SELECT 
-          td.TinDangID, td.DuAnID, td.KhuVucID, td.ChinhSachCocID,
+          td.TinDangID,
           td.TieuDe, td.URL, td.MoTa,
           td.TienIch, td.GiaDien, td.GiaNuoc, td.GiaDichVu, td.MoTaGiaDichVu,
           (
@@ -38,9 +38,8 @@ class PublicTinDangModel {
             JOIN phong p ON pt.PhongID = p.PhongID
             WHERE pt.TinDangID = td.TinDangID
           ) as DienTich,
-          td.TrangThai, td.TaoLuc, td.CapNhatLuc, td.DuyetLuc,
-          da.TenDuAn, da.DiaChi AS DiaChi, da.YeuCauPheDuyetChu,
-          da.ViDo, da.KinhDo,
+          td.TaoLuc, td.CapNhatLuc,
+          da.TenDuAn, da.DiaChi AS DiaChi,
           kv.TenKhuVuc,
           (SELECT COUNT(*) FROM phong_tindang pt WHERE pt.TinDangID = td.TinDangID) as TongSoPhong,
           (SELECT COUNT(*) FROM phong_tindang pt 
@@ -191,9 +190,9 @@ class PublicTinDangModel {
         td.TieuDe, td.URL, td.MoTa,
         td.TienIch, td.GiaDien, td.GiaNuoc, td.GiaDichVu, td.MoTaGiaDichVu,
         td.TrangThai, td.TaoLuc, td.CapNhatLuc, td.DuyetLuc,td.KhuVucID,
-        da.ChuDuAnID, da.TenDuAn,da.PhuongThucVao, da.DiaChi, da.YeuCauPheDuyetChu,
+        da.TenDuAn, da.DiaChi, da.YeuCauPheDuyetChu,
         da.ViDo, da.KinhDo,
-        da.BangHoaHong, da.SoThangCocToiThieu,
+        da.SoThangCocToiThieu,
         kv.TenKhuVuc,
         (SELECT COUNT(*) FROM phong_tindang pt WHERE pt.TinDangID = td.TinDangID) as TongSoPhong
       FROM tindang td

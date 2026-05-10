@@ -7,7 +7,7 @@ const db = require('../config/db'); // nếu cần dùng trực tiếp
 const generateToken = (userId, vaiTroId) => {
   return jwt.sign(
     { userId, vaiTroId },
-    process.env.JWT_SECRET || '1355b670-f139-483a-be4e-fa80fc8e37a0',
+    process.env.JWT_SECRET || 'your-secret-key',
     { expiresIn: '7d' } // Token hết hạn sau 7 ngày
   );
 };
@@ -46,23 +46,26 @@ exports.login = async (req, res) => {
     });
   } catch (err) {
     console.error('Login error:', err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: 'Lỗi hệ thống khi đăng nhập' });
   }
 };
 
 // POST /api/register
 exports.register = async (req, res) => {
   const { name, email, phone, password, roleId } = req.body;
-  if (!name || !email || !phone || !password || roleId == null) {
-    return res.status(400).json({ error: 'name, email, phone, password và roleId là bắt buộc' });
+  if (!name || !email || !phone || !password) {
+    return res.status(400).json({ error: 'name, email, phone, password là bắt buộc' });
   }
+
+  // Chỉ cho phép đăng ký Khách hàng (1) hoặc Chủ dự án (3)
+  const allowedPublicRoles = [1, 3];
+  const safeRoleId = allowedPublicRoles.includes(Number(roleId)) ? Number(roleId) : 1;
 
   try {
     const matKhauHash = crypto.createHash('md5').update(String(password)).digest('hex');
-    const [result] = await User.createNguoiDung(name, email, phone, matKhauHash, roleId);
+    const [result] = await User.createNguoiDung(name, email, phone, matKhauHash, safeRoleId);
 
-    // Tạo JWT token cho user mới
-    const token = generateToken(result.insertId, roleId);
+    const token = generateToken(result.insertId, safeRoleId);
 
     res.status(201).json({
       success: true,
@@ -72,12 +75,12 @@ exports.register = async (req, res) => {
         TenDayDu: name,
         Email: email,
         SoDienThoai: phone,
-        VaiTroHoatDongID: roleId,
-        TenVaiTro: roleId === 3 ? 'Chủ dự án' : 'Khách hàng'
+        VaiTroHoatDongID: safeRoleId,
+        TenVaiTro: safeRoleId === 3 ? 'Chủ dự án' : 'Khách hàng'
       }
     });
   } catch (err) {
     console.error('Register error:', err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: 'Lỗi hệ thống khi đăng ký' });
   }
 };

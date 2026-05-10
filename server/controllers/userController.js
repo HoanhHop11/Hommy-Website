@@ -20,7 +20,8 @@ exports.getUsers = async (req, res) => {
     const [rows] = await User.getAll();
     res.json(rows.map(mapUser));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[UserController] getUsers error:', err);
+    res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -77,7 +78,8 @@ exports.createUser = async (req, res) => {
     };
     res.status(201).json(created);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[UserController] createUser error:', err);
+    res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -89,7 +91,8 @@ exports.getUserById = async (req, res) => {
       return res.status(404).json({ error: "Not found" });
     res.json(mapUser(rows[0]));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[UserController] getUserById error:', err);
+    res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -145,7 +148,8 @@ exports.updateUser = async (req, res) => {
       return res.status(404).json({ error: "Not found after update" });
     res.json(mapUser(rows[0]));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[UserController] updateUser error:', err);
+    res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -153,8 +157,9 @@ exports.deleteUser = async (req, res) => {
   const id = req.params.id;
   try {
     await User.deleteNguoiDung(id);
-    res.status(204).send("thanhcong");
+    res.status(204).send();
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[UserController] deleteUser error:', err);
+    res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };

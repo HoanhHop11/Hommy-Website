@@ -1,10 +1,11 @@
-require('dotenv').config(); // Load .env file FIRST
+require('dotenv').config();
 
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
 const socketAuth = require('./middleware/socketAuth');
 const setupChatHandlers = require('./socket/chatHandlers');
 const setupGoiYHandlers = require('./socket/goiYHandlers');
@@ -149,17 +150,38 @@ app.options('*', cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Debug middleware để log tất cả requests
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - ${new Date().toISOString()}`);
-  next();
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Quá nhiều yêu cầu, vui lòng thử lại sau' }
 });
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 15,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Quá nhiều lần thử đăng nhập, vui lòng thử lại sau 15 phút' }
+});
+
+app.use(globalLimiter);
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${new Date().toISOString()}`);
+    next();
+  });
+}
 
 // Phục vụ file static cho uploads (để hiển thị ảnh)
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Định nghĩa API
 app.use('/api/users', userRoutes);
+app.use('/api/login', authLimiter);
+app.use('/api/register', authLimiter);
 app.use('/api', authRoutes);
 
 

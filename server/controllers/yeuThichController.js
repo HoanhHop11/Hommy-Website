@@ -1,18 +1,40 @@
 const YT = require('../models/yeuThichModel');
 
+const parsePositiveInt = (value) => {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
+};
+
+const getAuthenticatedUserId = (req) => {
+  return parsePositiveInt(req.user?.id);
+};
+
 exports.add = async (req, res) => {
-  const { NguoiDungID, TinDangID } = req.body;
-  if (!NguoiDungID || !TinDangID) return res.status(400).json({ error: 'NguoiDungID và TinDangID là bắt buộc' });
+  const userId = getAuthenticatedUserId(req);
+  const tinDangId = parsePositiveInt(req.body?.TinDangID);
+  if (!userId || !tinDangId) {
+    return res.status(400).json({ error: 'TinDangID là bắt buộc và phải hợp lệ' });
+  }
+
   try {
-    await YT.addFavorite(NguoiDungID, TinDangID);
-    return res.status(201).json({ NguoiDungID, TinDangID });
+    await YT.addFavorite(userId, tinDangId);
+    return res.status(201).json({ TinDangID: tinDangId });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
 };
 
 exports.remove = async (req, res) => {
-  const { userId, tinId } = req.params;
+  const authUserId = getAuthenticatedUserId(req);
+  const userId = parsePositiveInt(req.params.userId);
+  const tinId = parsePositiveInt(req.params.tinId);
+  if (!authUserId || !userId || !tinId) {
+    return res.status(400).json({ error: 'Tham số không hợp lệ' });
+  }
+  if (authUserId !== userId) {
+    return res.status(403).json({ error: 'Không có quyền truy cập dữ liệu người dùng khác' });
+  }
+
   try {
     await YT.removeFavorite(userId, tinId);
     return res.status(204).send();
@@ -22,11 +44,18 @@ exports.remove = async (req, res) => {
 };
 
 exports.listByUser = async (req, res) => {
-  const userId = req.params.userId;
+  const authUserId = getAuthenticatedUserId(req);
+  const userId = parsePositiveInt(req.params.userId);
+  if (!authUserId || !userId) {
+    return res.status(400).json({ error: 'Tham số không hợp lệ' });
+  }
+  if (authUserId !== userId) {
+    return res.status(403).json({ error: 'Không có quyền truy cập dữ liệu người dùng khác' });
+  }
+
   try {
     const [rows] = await YT.getByUser(userId);
     return res.json(rows.map(r => ({
-      NguoiDungID: r.NguoiDungID,
       TinDangID: r.TinDangID,
       TieuDe: r.TieuDe || null,
       Gia: r.Gia != null ? r.Gia : null,
@@ -41,11 +70,18 @@ exports.listByUser = async (req, res) => {
 };
 
 exports.listWithTinDetails = async (req, res) => {
-  const userId = req.params.userId;
+  const authUserId = getAuthenticatedUserId(req);
+  const userId = parsePositiveInt(req.params.userId);
+  if (!authUserId || !userId) {
+    return res.status(400).json({ error: 'Tham số không hợp lệ' });
+  }
+  if (authUserId !== userId) {
+    return res.status(403).json({ error: 'Không có quyền truy cập dữ liệu người dùng khác' });
+  }
+
   try {
     const [rows] = await YT.getByUserWithTin(userId);
     return res.json(rows.map(r => ({
-      NguoiDungID: r.NguoiDungID,
       TinDangID: r.TinDangID,
       TieuDe: r.TieuDe || null,
       Img: r.HinhAnhFull || r.HinhAnhPhong || r.Img || null,
@@ -58,8 +94,12 @@ exports.listWithTinDetails = async (req, res) => {
 };
 
 exports.check = async (req, res) => {
-  const { userId, tinId } = req.query;
-  if (!userId || !tinId) return res.status(400).json({ error: 'userId và tinId là bắt buộc' });
+  const userId = getAuthenticatedUserId(req);
+  const tinId = parsePositiveInt(req.query.tinId);
+  if (!userId || !tinId) {
+    return res.status(400).json({ error: 'tinId là bắt buộc và phải hợp lệ' });
+  }
+
   try {
     const [rows] = await YT.existsFavorite(userId, tinId);
     const exists = rows.length > 0;

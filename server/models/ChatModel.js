@@ -270,7 +270,7 @@ class ChatModel {
     // Lấy tin nhắn vừa tạo
     const [tinNhan] = await db.query(`
       SELECT 
-        t.*,
+        t.TinNhanID, t.CuocHoiThoaiID, t.NguoiGuiID, t.NoiDung, t.ThoiGianGui,
         nd.TenDayDu as NguoiGuiTen
       FROM tinnhan t
       JOIN nguoidung nd ON t.NguoiGuiID = nd.NguoiDungID

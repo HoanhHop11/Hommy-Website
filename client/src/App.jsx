@@ -61,7 +61,7 @@ import QuanLyKhuVuc from './pages/quanlykhuvuc';
 import ThanhToan from './pages/thanhtoan';
 import ThanhToanCoc from './pages/thanhtoancoc';
 import Appointments from './pages/cuochencuatoi'; // đúng thư mục hiện tại
-import QuanLy from './pages/QuanLy';
+import QuanLy from './pages/quanly';
 import VideoCallPopup from './components/VideoCallPopup';
 import KycDebugPlayground from './pages/XacThucKYC/KycDebugPlayground';
 function App() {

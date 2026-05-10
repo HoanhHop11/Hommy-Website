@@ -2,13 +2,20 @@ const express = require("express");
 const router = express.Router();
 const PublicDuAnController = require("../controllers/PublicDuAnController");
 
-// GET /api/public/du-an (public)
 router.get("/", PublicDuAnController.getDanhSachDuAn);
 
-// PUT /api/public/du-an/:id (không cần auth)
-router.put("/:id", PublicDuAnController.updateDuAn);
+router.put("/:id", (req, res) => {
+  return res.status(405).json({
+    success: false,
+    message: "Public API chỉ hỗ trợ GET"
+  });
+});
 
-// DELETE /api/public/du-an/:id (không cần auth)
-router.delete("/:id", PublicDuAnController.deleteDuAn);
+router.delete("/:id", (req, res) => {
+  return res.status(405).json({
+    success: false,
+    message: "Public API chỉ hỗ trợ GET"
+  });
+});
 
 module.exports = router;

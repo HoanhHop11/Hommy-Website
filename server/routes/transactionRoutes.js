@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const tc = require('../controllers/transactionController');
-console.log('transactionController:', typeof tc, 'list:', typeof tc.list, 'create:', typeof tc.create);
+const authenticate = require('../middleware/auth');
+const { requireRoles } = require('../middleware/role');
 
-router.get('/', tc.list);        // GET /api/transactions
-router.get('/:id', tc.getById); // GET /api/transactions/:id
-router.post('/', tc.create);     // POST /api/transactions
-router.put('/:id', tc.update);   // PUT /api/transactions/:id
-router.delete('/:id', tc.delete); // DELETE /api/transactions/:id
+const adminOnly = [authenticate, requireRoles(['QuanTriVienHeThong'])];
+
+router.get('/', ...adminOnly, tc.list);
+router.get('/:id', ...adminOnly, tc.getById);
+router.post('/', ...adminOnly, tc.create);
+router.put('/:id', ...adminOnly, tc.update);
+router.delete('/:id', ...adminOnly, tc.delete);
 
 module.exports = router;

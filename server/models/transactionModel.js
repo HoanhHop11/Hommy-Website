@@ -41,12 +41,22 @@ exports.insertTransaction = (tx) => {
 };
 
 exports.getAll = (opts = {}) => {
-  // optional pagination/sorting via opts in the future
-  return db.query('SELECT * FROM transactions ORDER BY transaction_date DESC, id DESC');
+  return db.query(
+    `SELECT id, user_id, bank_brand_name, account_number,
+            amount_out, amount_in, accumulated, transaction_content,
+            transaction_date, reference_number, code
+     FROM transactions ORDER BY transaction_date DESC, id DESC`
+  );
 };
 
 exports.getById = (id) => {
-  return db.query('SELECT * FROM transactions WHERE id = ? LIMIT 1', [id]);
+  return db.query(
+    `SELECT id, user_id, bank_brand_name, account_number,
+            amount_out, amount_in, accumulated, transaction_content,
+            transaction_date, reference_number, code
+     FROM transactions WHERE id = ? LIMIT 1`,
+    [id]
+  );
 };
 
 exports.updateTransaction = (id, updates) => {

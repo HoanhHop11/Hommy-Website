@@ -312,7 +312,6 @@ const ChiTietTinDang = () => {
 
     const payload = {
       TinDangID: tinDang.TinDangID,
-      ChuDuAnID: tinDang.ChuDuAnID,
       PhongID: henPhongId ? parseInt(henPhongId) : null,
       KhachHangID: parseInt(userId),
       NhanVienBanHangID: nhanVienId,

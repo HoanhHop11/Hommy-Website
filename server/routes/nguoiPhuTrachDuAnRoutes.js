@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const NguoiPhuTrachDuAnController = require("../controllers/NguoiPhuTrachDuAnController");
+const authenticate = require('../middleware/auth');
 
-// GET /api/nguoi-phu-trach-du-an/:id
-router.get("/:id", NguoiPhuTrachDuAnController.layDanhSach);
+router.get("/:id", authenticate, NguoiPhuTrachDuAnController.layDanhSach);
 
 module.exports = router;

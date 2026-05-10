@@ -1,17 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const lichSuViController = require("../controllers/lichSuViController");
+const authenticate = require('../middleware/auth');
+const { requireRoles } = require('../middleware/role');
 
-// POST /api/lich-su-vi (thêm mới)
-router.post("/", lichSuViController.them);
-
-// PUT /api/lich-su-vi/:id (sửa)
-router.put("/:id", lichSuViController.sua);
-
-// GET /api/lich-su-vi (xem tất cả)
-router.get("/", lichSuViController.danhSach);
-
-// GET /api/lich-su-vi/user/:user_id (xem theo user_id)
-router.get("/user/:user_id", lichSuViController.danhSachTheoUser);
+router.post("/", authenticate, lichSuViController.them);
+router.put("/:id", authenticate, requireRoles(['QuanTriVienHeThong']), lichSuViController.sua);
+router.get("/", authenticate, requireRoles(['QuanTriVienHeThong']), lichSuViController.danhSach);
+router.get("/user/:user_id", authenticate, lichSuViController.danhSachTheoUser);
 
 module.exports = router;

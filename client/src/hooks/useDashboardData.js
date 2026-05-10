@@ -6,6 +6,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { DashboardService, BaoCaoService } from '../services/ChuDuAnService';
 
+const isAuthError = (error) => {
+  const message = String(error?.message || '').toLowerCase();
+  return message.includes('token không hợp lệ')
+    || message.includes('token đã hết hạn')
+    || message.includes('không có token')
+    || message.includes('http 401');
+};
+
 /**
  * Hook lấy dữ liệu Dashboard (Quick metrics)
  * Sử dụng trong: Dashboard.jsx
@@ -27,7 +35,10 @@ export const useDashboardData = () => {
       return response.data;
     },
     staleTime: 5 * 60 * 1000, // Cache 5 phút
-    retry: 2, // Retry 2 lần cho dashboard (quan trọng)
+    retry: (failureCount, error) => {
+      if (isAuthError(error)) return false;
+      return failureCount < 2;
+    },
   });
 };
 
@@ -87,6 +98,10 @@ export const useDoanhThuTheoThang = () => {
       return response.data;
     },
     staleTime: 15 * 60 * 1000, // Cache 15 phút (historical data ít thay đổi)
+    retry: (failureCount, error) => {
+      if (isAuthError(error)) return false;
+      return failureCount < 2;
+    },
   });
 };
 

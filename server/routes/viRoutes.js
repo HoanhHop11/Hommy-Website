@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const viController = require("../controllers/viController");
+const authenticate = require('../middleware/auth');
 
-// GET /api/vi (lấy tất cả ví)
-router.get("/", viController.danhSach);
-
-// GET /api/vi/:id (lấy ví theo NguoiDungID)
-router.get("/:id", viController.layTheoNguoiDungId);
+router.get("/", authenticate, viController.danhSach);
+router.get("/:id", authenticate, viController.layTheoNguoiDungId);
 
 module.exports = router;

@@ -8,10 +8,19 @@ router.get("/", PublicTinDangController.getDanhSachTinDang);
 // GET /api/public/tin-dang/:id (public - chi tiết)
 router.get("/:id", PublicTinDangController.getChiTietTinDang);
 
-// PUT /api/public/tin-dang/:id (không cần auth)
-router.put("/:id", PublicTinDangController.updateTinDang);
+// Public endpoint chỉ cho phép đọc, không cho phép mutate dữ liệu.
+router.put("/:id", (req, res) => {
+  return res.status(405).json({
+    success: false,
+    message: "Public API chỉ hỗ trợ GET"
+  });
+});
 
-// DELETE /api/public/tin-dang/:id (không cần auth)
-router.delete("/:id", PublicTinDangController.deleteTinDang);
+router.delete("/:id", (req, res) => {
+  return res.status(405).json({
+    success: false,
+    message: "Public API chỉ hỗ trợ GET"
+  });
+});
 
 module.exports = router;

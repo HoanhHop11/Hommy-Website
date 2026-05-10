@@ -25,7 +25,7 @@ exports.create = async (req, res) => {
     return res.status(201).json({ id: result.insertId, ...tx });
   } catch (err) {
     console.error('create transaction error', err);
-    return res.status(500).json({ error: err.message || 'DB error' });
+    return res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -35,7 +35,7 @@ exports.list = async (req, res) => {
     return res.status(200).json(rows);
   } catch (err) {
     console.error('list transactions error', err);
-    return res.status(500).json({ error: err.message || 'DB error' });
+    return res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -47,14 +47,14 @@ exports.getById = async (req, res) => {
     return res.status(200).json(rows[0]);
   } catch (err) {
     console.error('get transaction error', err);
-    return res.status(500).json({ error: err.message || 'DB error' });
+    return res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
 exports.update = async (req, res) => {
   try {
     const id = req.params.id;
-    const allowed = ['user_id','sepay_id','bank_name','bank_brand_name','account_number','amount_out','amount_in','accumulated','transaction_content','transaction_date','reference_number','code','sub_account','bank_account_id'];
+    const allowed = ['user_id','bank_brand_name','account_number','amount_out','amount_in','accumulated','transaction_content','transaction_date','reference_number','code'];
     const updates = {};
     const payload = req.body || {};
     for (const k of allowed) if (payload[k] !== undefined) updates[k] = payload[k];
@@ -64,7 +64,7 @@ exports.update = async (req, res) => {
     return res.status(200).json(rows[0]);
   } catch (err) {
     console.error('update transaction error', err);
-    return res.status(500).json({ error: err.message || 'DB error' });
+    return res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };
 
@@ -75,6 +75,6 @@ exports.delete = async (req, res) => {
     return res.status(204).send();
   } catch (err) {
     console.error('delete transaction error', err);
-    return res.status(500).json({ error: err.message || 'DB error' });
+    return res.status(500).json({ error: 'Lỗi hệ thống' });
   }
 };

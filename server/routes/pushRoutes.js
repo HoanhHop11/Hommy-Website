@@ -415,7 +415,7 @@ router.post('/send-to-user', async (req, res) => {
     const internalKey = req.headers['x-internal-key'];
 
     // Kiểm tra internal key (bảo mật cho internal calls)
-    if (internalKey !== process.env.INTERNAL_API_KEY && internalKey !== 'hommy-internal-2024') {
+    if (!process.env.INTERNAL_API_KEY || internalKey !== process.env.INTERNAL_API_KEY) {
       return res.status(403).json({
         success: false,
         message: 'Unauthorized'

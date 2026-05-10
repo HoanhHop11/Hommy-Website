@@ -8,7 +8,6 @@ class LichSuViModel {
     trang_thai,
     LoaiGiaoDich,
   }) {
-    console.log("LoaiGiaoDich nhận được:", LoaiGiaoDich);
     const sql = `
       INSERT INTO lich_su_vi (user_id, ma_giao_dich, so_tien, trang_thai, LoaiGiaoDich)
       VALUES (?, ?, ?, ?, ?)
@@ -109,14 +108,14 @@ class LichSuViModel {
 
   static async layTatCa() {
     const [rows] = await db.execute(
-      "SELECT * FROM lich_su_vi ORDER BY thoi_gian DESC"
+      "SELECT id, user_id, ma_giao_dich, so_tien, trang_thai, LoaiGiaoDich, thoi_gian FROM lich_su_vi ORDER BY thoi_gian DESC"
     );
     return rows;
   }
 
   static async layTheoUser(user_id) {
     const [rows] = await db.execute(
-      "SELECT * FROM lich_su_vi WHERE user_id = ? ORDER BY thoi_gian DESC",
+      "SELECT id, user_id, ma_giao_dich, so_tien, trang_thai, LoaiGiaoDich, thoi_gian FROM lich_su_vi WHERE user_id = ? ORDER BY thoi_gian DESC",
       [user_id]
     );
     return rows;

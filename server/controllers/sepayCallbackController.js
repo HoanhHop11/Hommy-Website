@@ -11,8 +11,6 @@ exports.callback = async (req, res) => {
     _store.unshift({ at: new Date().toISOString(), payload });
     if (_store.length > MAX_STORE) _store.pop();
 
-    console.log('[sepayCallback] payload:', payload);
-
     // map và insert transaction nếu cần (giữ như hiện hành)
     const tx = {
       user_id: payload.user_id || null,
@@ -39,7 +37,7 @@ exports.callback = async (req, res) => {
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('[sepayCallback] error:', err.message || err);
-    return res.status(500).json({ success: false, error: err.message || 'server error' });
+    return res.status(500).json({ success: false, error: 'Lỗi hệ thống' });
   }
 };
 

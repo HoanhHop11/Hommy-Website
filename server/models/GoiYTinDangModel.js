@@ -47,7 +47,6 @@ class GoiYTinDangModel {
           da.DiaChi,
           da.ViDo,
           da.KinhDo,
-          da.PhuongThucVao,
           kv.TenKhuVuc,
           kv.KhuVucID,
           (
@@ -291,8 +290,6 @@ class GoiYTinDangModel {
           da.DiaChi,
           da.ViDo,
           da.KinhDo,
-          da.PhuongThucVao,
-          da.ChuDuAnID,
           kv.TenKhuVuc,
           kv.KhuVucID,
           nd.TenDayDu as TenChuDuAn,
@@ -393,8 +390,7 @@ class GoiYTinDangModel {
           da.TenDuAn,
           da.DiaChi,
           da.ViDo,
-          da.KinhDo,
-          da.PhuongThucVao
+          da.KinhDo
         FROM phong p
         INNER JOIN duan da ON p.DuAnID = da.DuAnID
         WHERE p.PhongID = ?

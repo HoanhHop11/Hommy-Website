@@ -14,13 +14,13 @@ class CuocHenController {
    */
   static async create(req, res) {
     try {
-      const { PhongID, KhachHangID, NhanVienBanHangID, ThoiGianHen, GhiChu,PhuongThucVao } = req.body;
+      const { PhongID, NhanVienBanHangID, ThoiGianHen, GhiChu, PhuongThucVao } = req.body;
+      const KhachHangID = req.user?.id;
 
-      // Validation
       if (!PhongID || !KhachHangID || !ThoiGianHen) {
         return res.status(400).json({
           success: false,
-          message: 'Thiếu thông tin bắt buộc: PhongID, KhachHangID, ThoiGianHen'
+          message: 'Thiếu thông tin bắt buộc: PhongID, ThoiGianHen'
         });
       }
 
@@ -72,13 +72,13 @@ class CuocHenController {
       console.error('[CuocHenController] Lỗi tạo cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
 
   /**
-   * Lấy tất cả cuộc hẹn (Admin/Public)
+   * Lấy tất cả cuộc hẹn (Admin only)
    * GET /api/cuoc-hen
    */
   static async getAll(req, res) {
@@ -95,7 +95,7 @@ class CuocHenController {
       console.error('[CuocHenController] Lỗi lấy danh sách cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -115,6 +115,16 @@ class CuocHenController {
         });
       }
 
+      const authUserId = req.user?.id;
+      const userRole = req.user?.vaiTro;
+      const adminRoles = ['QuanTriVienHeThong', 'NhanVienDieuHanh', 'NhanVienBanHang'];
+      if (authUserId !== khachHangId && !adminRoles.includes(userRole)) {
+        return res.status(403).json({
+          success: false,
+          message: 'Bạn không có quyền xem cuộc hẹn của người khác'
+        });
+      }
+
       const cuocHenList = await CuocHenModel.timTheoKhachHang(khachHangId);
 
       res.json({
@@ -125,7 +135,7 @@ class CuocHenController {
       console.error('[CuocHenController] Lỗi tìm cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -145,6 +155,16 @@ class CuocHenController {
         });
       }
 
+      const authUserId = req.user?.id;
+      const userRole = req.user?.vaiTro;
+      const allowedRoles = ['QuanTriVienHeThong', 'NhanVienDieuHanh', 'ChuDuAn'];
+      if (authUserId !== nhanVienId && !allowedRoles.includes(userRole)) {
+        return res.status(403).json({
+          success: false,
+          message: 'Bạn không có quyền xem cuộc hẹn của nhân viên khác'
+        });
+      }
+
       const cuocHenList = await CuocHenModel.timTheoNhanVien(nhanVienId);
 
       res.json({
@@ -155,7 +175,7 @@ class CuocHenController {
       console.error('[CuocHenController] Lỗi tìm cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -175,6 +195,16 @@ class CuocHenController {
         });
       }
 
+      const authUserId = req.user?.id;
+      const userRole = req.user?.vaiTro;
+      const adminRoles = ['QuanTriVienHeThong', 'NhanVienDieuHanh'];
+      if (authUserId !== chuDuAnId && !adminRoles.includes(userRole)) {
+        return res.status(403).json({
+          success: false,
+          message: 'Bạn không có quyền xem cuộc hẹn của chủ dự án khác'
+        });
+      }
+
       const cuocHenList = await CuocHenModel.timTheoChuDuAn(chuDuAnId);
 
       res.json({
@@ -185,7 +215,7 @@ class CuocHenController {
       console.error('[CuocHenController] Lỗi tìm cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -222,7 +252,7 @@ class CuocHenController {
       console.error('[CuocHenController] Lỗi lấy chi tiết cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -234,7 +264,6 @@ class CuocHenController {
   static async update(req, res) {
     try {
       const cuocHenId = parseInt(req.params.id);
-      // TODO: Implement
       return res.status(501).json({
         success: false,
         message: 'Chức năng đang được phát triển'
@@ -243,7 +272,7 @@ class CuocHenController {
       console.error('Lỗi cập nhật cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -255,7 +284,6 @@ class CuocHenController {
   static async delete(req, res) {
     try {
       const cuocHenId = parseInt(req.params.id);
-      // TODO: Implement
       return res.status(501).json({
         success: false,
         message: 'Chức năng đang được phát triển'
@@ -264,7 +292,7 @@ class CuocHenController {
       console.error('Lỗi xóa cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -298,7 +326,7 @@ class CuocHenController {
       console.error('Lỗi lấy danh sách cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -342,7 +370,7 @@ class CuocHenController {
       console.error('Lỗi xác nhận cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -364,7 +392,7 @@ class CuocHenController {
       console.error('Lỗi lấy metrics cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -415,7 +443,7 @@ class CuocHenController {
       console.error('Lỗi phê duyệt cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }
@@ -466,7 +494,7 @@ class CuocHenController {
       console.error('Lỗi từ chối cuộc hẹn:', error);
       res.status(500).json({
         success: false,
-        message: error.message
+        message: 'Lỗi hệ thống'
       });
     }
   }

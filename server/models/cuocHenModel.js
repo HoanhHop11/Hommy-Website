@@ -336,11 +336,14 @@ class CuocHenModel {
       const [rows] = await db.execute(
         `
         SELECT 
-          ch.*,
+          ch.CuocHenID, ch.TinDangID, ch.PhongID, ch.KhachHangID,
+          ch.NhanVienBanHangID, ch.ThoiGianHen, ch.TrangThai,
+          ch.GhiChu, ch.GhiChuKetQua, ch.PheDuyetChuDuAn,
+          ch.TaoLuc, ch.CapNhatLuc,
           p.TenPhong, p.TrangThai as TrangThaiPhong,
           da.TenDuAn, da.DiaChi, da.ViDo, da.KinhDo,
-          kh.TenDayDu as TenKhachHang, kh.SoDienThoai as SDTKhachHang, kh.Email as EmailKhachHang,
-          nv.TenDayDu as TenNhanVien, nv.SoDienThoai as SDTNhanVien, nv.Email as EmailNhanVien
+          kh.TenDayDu as TenKhachHang, kh.SoDienThoai as SDTKhachHang,
+          nv.TenDayDu as TenNhanVien, nv.SoDienThoai as SDTNhanVien
         FROM cuochen ch
         INNER JOIN phong p ON ch.PhongID = p.PhongID
         INNER JOIN duan da ON p.DuAnID = da.DuAnID

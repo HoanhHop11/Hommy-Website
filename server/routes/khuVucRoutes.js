@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const kv = require('../controllers/khuVucController');
+const authenticate = require('../middleware/auth');
+const { requireRoles } = require('../middleware/role');
 
-router.get('/', kv.getAll);         // list flat
-router.get('/tree', kv.getTree);   // hierarchical tree
-router.get('/:id/nhan-vien', kv.getNhanVien);
+const adminOnly = [authenticate, requireRoles(['QuanTriVienHeThong'])];
+
+router.get('/', kv.getAll);
+router.get('/tree', kv.getTree);
+router.get('/:id/nhan-vien', authenticate, kv.getNhanVien);
 router.get('/:id', kv.getById);
-router.post('/', kv.create);
-router.put('/:id', kv.update);
-router.delete('/:id', kv.delete);
+router.post('/', ...adminOnly, kv.create);
+router.put('/:id', ...adminOnly, kv.update);
+router.delete('/:id', ...adminOnly, kv.delete);
 
 module.exports = router;

@@ -8,11 +8,7 @@ const db = require('../config/db');
 
 const authMiddleware = async (req, res, next) => {
   try {
-    console.log('[AUTH] Request path:', req.path, 'Method:', req.method);
-
-    // Lấy token từ header Authorization
     const authHeader = req.header('Authorization');
-    console.log('[AUTH] Authorization header:', authHeader ? '✅ Có token' : '❌ Không có token');
     const token = authHeader && authHeader.startsWith('Bearer ')
       ? authHeader.slice(7)
       : null;
@@ -24,19 +20,21 @@ const authMiddleware = async (req, res, next) => {
       });
     }
 
-    // Cho phép token mock cho môi trường development (được định nghĩa trong front-end)
-    const mockToken = process.env.MOCK_DEV_TOKEN || 'mock-token-for-development';
-    if (token === mockToken) {
-      req.user = {
-        id: parseInt(process.env.MOCK_USER_ID || '1', 10),
-        tenDayDu: process.env.MOCK_USER_NAME || 'Chu Du An Dev',
-        email: process.env.MOCK_USER_EMAIL || 'chu.du.an.dev@daphongtro.local',
-        vaiTroId: parseInt(process.env.MOCK_ROLE_ID || '3', 10),
-        vaiTro: process.env.MOCK_ROLE_NAME || 'ChuDuAn',
-        isMockUser: true
-      };
+    // Mock token chỉ hoạt động trong development
+    if (process.env.NODE_ENV !== 'production') {
+      const mockToken = process.env.MOCK_DEV_TOKEN;
+      if (mockToken && token === mockToken) {
+        req.user = {
+          id: parseInt(process.env.MOCK_USER_ID || '1', 10),
+          tenDayDu: process.env.MOCK_USER_NAME || 'Chu Du An Dev',
+          email: process.env.MOCK_USER_EMAIL || 'chu.du.an.dev@daphongtro.local',
+          vaiTroId: parseInt(process.env.MOCK_ROLE_ID || '3', 10),
+          vaiTro: process.env.MOCK_ROLE_NAME || 'ChuDuAn',
+          isMockUser: true
+        };
 
-      return next();
+        return next();
+      }
     }
 
     // Verify JWT token
@@ -69,8 +67,6 @@ const authMiddleware = async (req, res, next) => {
       .replace(/[\u0300-\u036f]/g, '') // Bỏ dấu tiếng Việt
       .replace(/\s+/g, '') // Bỏ khoảng trắng
       .replace(/[đĐ]/g, match => match === 'đ' ? 'd' : 'D'); // Đổi đ → d
-
-    console.log('🔐 [AUTH] Raw role:', rawRoleName, '→ Normalized:', normalizedRoleName);
 
     // Gắn thông tin user vào request
     req.user = {

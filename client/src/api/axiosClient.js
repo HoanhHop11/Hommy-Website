@@ -15,9 +15,10 @@ console.log('🔗 [axiosClient] Base URL:', axiosClient.defaults.baseURL);
 // Interceptor: Tự động thêm token vào header
 axiosClient.interceptors.request.use(
   (config) => {
-    // Lấy token từ localStorage
+    // Ưu tiên token key chuẩn, fallback về user.token để tương thích dữ liệu cũ
+    const tokenFromStorage = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const token = user.token;
+    const token = tokenFromStorage || user.token;
     
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -37,6 +38,7 @@ axiosClient.interceptors.response.use(
     // Nếu token hết hạn (401), logout user
     if (error.response?.status === 401) {
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
       window.location.href = '/login';
     }
     
