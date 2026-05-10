@@ -21,7 +21,7 @@ import {
   HiOutlineEye,
   HiOutlineClock,
 } from "react-icons/hi2";
-import Header from "../../components/Header";
+import Header from "../../components/header";
 import Footer from "../../components/footer";
 import { PublicTinDangService } from "../../services/PublicService"; // Đổi sang PublicService
 import cuocHenApi from "../../api/cuocHenApi"; // ✅ Dùng API mới thay vì PublicCuocHenService

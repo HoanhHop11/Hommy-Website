@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/Header';
+import Header from '../../components/header';
 import Footer from '../../components/footer';
 import thanhtoanApi from '../../api/thanhtoanApi';
 import './thanhtoan.css';
